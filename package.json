@@ -1,0 +1,15 @@
+{
+    "name": "esport-calendar",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "concurrently \"npm run start --prefix backend\" \"npm run start --prefix frontend\"",
+      "install:all": "npm install --prefix backend && npm install --prefix frontend"
+    },
+    "devDependencies": {
+      "concurrently": "^6.2.1",
+      "css-loader": "^6.5.1",
+      "postcss-loader": "^6.2.0",
+      "style-loader": "^3.3.1"
+    }
+}
+  

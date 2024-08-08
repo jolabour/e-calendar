@@ -1,0 +1,75 @@
+.header {
+  background: #000000;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease;
+  border-bottom: 4px solid #0d6474;
+  /*animation: fadeIn 2s ease-out;*/
+}
+
+.logo-container {
+  margin-right: 50px; /* Place le logo à gauche */
+}
+
+.logo {
+  height: 50px; /* Ajustez la taille de votre logo */
+}
+
+.header-content {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.header-content nav {
+  display: flex;
+}
+
+.header-content nav a {
+  margin: 10px 20px; /* Ajoutez la marge ici */
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  text-decoration: none; /* Enlève les soulignements par défaut */
+}
+
+.header-content nav a:hover {
+  color: #0d6474;
+}
+
+.login-button {
+  margin-left: auto; /* Espace entre la navigation et le bouton */
+  padding: 10px 20px;
+  background-color: #0d6474;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #ffffff;
+  color: #0d6474;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
