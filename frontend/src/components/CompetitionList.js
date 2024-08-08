@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import '../assets/styles/CurrentCompetitions.css'; // Assurez-vous que le fichier CSS est correctement référencé
+import React, { useState } from 'react';
+import '../assets/styles/CompetitionList.css'; // Assurez-vous que le fichier CSS est correctement référencé
 import defaultLogo from '../assets/images/default-logo.png'; // Logo par défaut
 
-const CurrentCompetitions = () => {
-  const [competitions, setCompetitions] = useState([]);
+const CompetitionList = ({ competitions }) => {
+  const [hoveredId, setHoveredId] = useState(null);
 
-  useEffect(() => {
-    const fetchCompetitions = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/competitions');
-        const data = await response.json();
-        setCompetitions(data);
-      } catch (error) {
-        console.error('Error fetching competitions:', error);
-      }
-    };
+  const handleMouseEnter = (id) => {
+    setHoveredId(id);
+  };
 
-    fetchCompetitions();
-  }, []);
+  const handleMouseLeave = () => {
+    setHoveredId(null);
+  };
 
   return (
     <section className="current-competitions">
-      <h2>Compétitions en Cours</h2>
       <ul>
         {competitions.map((comp) => (
-          <li key={comp.id} className="competition-item">
+          <div
+          key={comp.id}
+          className={`competition-item ${hoveredId === comp.id ? 'highlight' : ''}`}
+          onMouseEnter={() => handleMouseEnter(comp.id)}
+          onMouseLeave={handleMouseLeave}
+          >
             <div className="game-logo">
                 <img 
                   src={comp.game.logoUrl}
                   alt={comp.game.name}
+                  loading="lazy"
                   className="game-logo" 
                 />
             </div>
@@ -42,6 +41,7 @@ const CurrentCompetitions = () => {
                 <img 
                   src={comp.teamA.logoUrl || defaultLogo}  
                   alt={comp.teamA.name}
+                  loading="lazy"
                   className="team-logo" 
                 />
               </div>
@@ -49,18 +49,19 @@ const CurrentCompetitions = () => {
               <div className="team2">
                 <img 
                   src={comp.teamB.logoUrl || defaultLogo} 
-                  alt={comp.teamB.name} 
+                  alt={comp.teamB.name}
+                  loading="lazy" 
                   className="team-logo" 
                 />
               </div>
               <div className="team-name">{comp.teamB.name}</div>
             </div>
-          </li>
+          </div>
         ))}
       </ul>
     </section>
   );
 };
 
-export default CurrentCompetitions;
+export default CompetitionList;
 

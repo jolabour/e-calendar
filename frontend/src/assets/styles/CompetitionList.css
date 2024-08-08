@@ -1,42 +1,29 @@
 .current-competitions {
-  background: #0e0d0d;
-  color: #ffffff;
-  padding: 20px;
-  text-align: center;
-  margin-top: 80px; /* Assurez-vous que cette valeur est au moins égale à la hauteur du header */
   animation: fadeIn 2s ease-out;
-  margin-left: 50px;
-  margin-right: 50px;
-  flex:2;
-}
-
-.current-competitions h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
 }
 
 .current-competitions ul {
   list-style: none;
   padding: 0;
 }
+.highlight {
+  color: #0d6474;
+  background: #1d1a1a;
+}
 
 .competition-item {
-  margin-bottom: 10px;
   padding: 15px;
   display: flex;
   align-items: center;
-  border-top: 2px solid #0d6474;
-  border-bottom: 2px solid #0d6474;
+  border-bottom: 1px solid #0d6474;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
-.current-competitions ul:hover {
-  color: #0d6474;
-}
-
-.game-logo {
-  height: 50px; /* Ajustez la taille des logos des équipes */
-  object-fit: fill;
+.game-logo img {
   width: 100px;
+  height: 50px;
+  object-fit: contain;
 }
 
 .competition-time {
@@ -64,7 +51,7 @@
   align-items: center;
   justify-content: flex-start;
   position: center;
-  margin-left: 215px;
+  margin-left: 230px;
 }
 
 .team {
@@ -90,5 +77,15 @@
   font-size: 1.2rem;
   margin: 0 20px;
   color: #ffffff;
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 

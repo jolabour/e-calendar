@@ -30,7 +30,24 @@ const competitions = [
 ];
 
 app.get('/api/competitions', (req, res) => {
-  res.json(competitions);
+  try {
+    console.log(req.query.games)
+    const games = req.query.games ? req.query.games.split(',') : [];
+    let query = 'SELECT * FROM competitions';
+    const params = [];
+
+    if (games.length > 0) {
+      const placeholders = games.map(() => '?').join(',');
+      query += ` WHERE game IN (${placeholders})`;
+      params.push(...games);
+    }
+
+    //const [rows] = await db.execute(query, params);
+    console.log(competitions)
+    res.json(competitions);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 app.use('/images', express.static(path.join(__dirname, 'public/images')));

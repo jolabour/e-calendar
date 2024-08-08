@@ -1,0 +1,56 @@
+.filter-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter-item {
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    color: white;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    cursor: pointer;
+    transition: filter 0.3s ease, transform 0.3s ease;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    filter: brightness(0.5);
+  }
+  
+  .filter-item:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+  }
+  
+  .filter-item.active {
+    filter: brightness(1.2); /* Maintien l'effet de surbrillance pour les éléments sélectionnés */
+    transform: scale(1.05);
+  }
+  
+  .filter-item:active {
+    filter: brightness(1.4);
+    transform: scale(1);
+  }
+  
+
+  .filter-item.trackmania { 
+    background-image: url('../images/trackmania.png'); 
+}
+
+.filter-item.league-of-legends { 
+    background-image: url('../images/leagueoflegends.png'); 
+}
+
+.filter-item.valorant {
+     background-image: url('../images/valorant.png'); 
+}
+
+.filter-item.overwatch { 
+    background-image: url('../images/overwatch.png'); 
+}
+  
