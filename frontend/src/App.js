@@ -9,28 +9,9 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import './App.css';
 
 const App = () => {
-  const games = ['trackmania', 'League of Legends', 'Valorant', 'Overwatch'];
-  const [matches, setMatches] = useState([]);
+  const games = ['trackmania', 'league-of-legends', 'valorant', 'overwatch'];
   const [selectedGames, setSelectedGames] = useState(games);
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
-
-  useEffect(() => {
-    fetchMatches();
-  }, [selectedGames]);
-
-  const fetchMatches = async () => {
-    try {
-      const gameQuery = selectedGames.length > 0 ? `?games=${selectedGames.join(',')}` : '';
-      const response = await fetch(`http://localhost:5000/api/matches${gameQuery}`);
-      const data = await response.json();
-      setMatches(data);
-    } catch (error) {
-      console.error('Error fetching matches:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const shouldShowSidebar = !['/create-match'].includes(location.pathname);
 
@@ -45,8 +26,8 @@ const App = () => {
         )}
         <main className="content">
           <Routes>
-            <Route path="/" element={loading ? <Loader /> : <MatchesList matches={matches} />} />
-            <Route path="/calendrier" element={<MatchesList matches={matches} />} />
+            <Route path="/" element={<MatchesList selectedGames={selectedGames} />} />
+            <Route path="/calendrier" element={<MatchesList selectedGames={selectedGames} />} />
             <Route path="/create-match" element={<CreateMatch />} />
           </Routes>
         </main>

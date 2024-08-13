@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Définir le schéma pour les informations des équipes
 const teamSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  logo: { type: String }
+  logo: { type: String}
 });
 
 // Définir le schéma principal pour les matchs
@@ -17,6 +17,16 @@ const matchSchema = new mongoose.Schema({
   teamA: { type: teamSchema, required: true },
   teamB: { type: teamSchema, required: true }
 });
+
+matchSchema.statics.findByGame = async function(gameName) {
+  try {
+    return await this.find({
+      'game': { $in: gameName }
+    });
+  } catch (error) {
+    throw new Error(`Error finding matches by game: ${error.message}`);
+  }
+};
 
 // Créer le modèle à partir du schéma
 const Match = mongoose.model('Match', matchSchema);

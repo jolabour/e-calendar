@@ -26,6 +26,7 @@
   display: flex;
   flex: 1; /* Prend tout l'espace restant */
   overflow: hidden;
+  margin-top: 80px;
   /*margin-top: -5px; /* Compense la bordure si nécessaire */
 }
 
@@ -33,10 +34,9 @@
   width: 300px; /* Réduit la largeur de la barre latérale pour donner plus de place aux compétitions */
   box-sizing: border-box; /* Assure que le padding est inclus dans la largeur totale */
   flex-shrink: 0; /* Assure que la sidebar ne rétrécit pas */
-  margin-top: 80px;
 }
 
-.matches {
+.content {
   flex: 2; /* Prend tout l'espace restant après le filtre */
   overflow-y: auto; /* Ajoute un défilement vertical si nécessaire */
   position: relative; /* Assure que le loader est centré dans cette zone */

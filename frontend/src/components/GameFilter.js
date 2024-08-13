@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import '../assets/styles/GameFilter.css';
 import SearchBar from './SearchBar';
 
@@ -24,6 +24,10 @@ const Filter = ({ games, selectedGames, onSelectGame }) => {
       onSelectGame(games)
     }
   };
+
+  useEffect(() => {
+    console.log('Selected games in Filter:', selectedGames);
+  }, [selectedGames]);
 
   return (
     <div className="filter-container">
