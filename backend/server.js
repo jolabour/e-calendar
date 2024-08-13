@@ -1,58 +1,24 @@
 const express = require('express');
-const app = express();
-const port = 5000;
+const connectDB = require('./config/Db'); // Importez le fichier de configuration
+const matchesRoutes = require('./routes/MatchesRoutes');
 const cors = require('cors');
-const path = require('path');
+require('dotenv').config();
+
+const app = express();
 
 app.use(cors());
 
-// Exemple de données pour les compétitions
-const competitions = [
-  {
-    id: 1,
-    name: 'Compétition A',
-    game: {name: 'trackmania', logoUrl: 'http://localhost:5000/images/trackmania.png'},
-    date: '08 Janvier',
-    time: '18:00',
-    teamA: { name: 'OPF', logoUrl: 'http://localhost:5000/images/opf.png' },
-    teamB: { name: 'Zephyr', logoUrl: 'http://localhost:5000/images/zephyr.png'}, // Logo manquant
-  },
-  {
-    id: 2,
-    name: 'Compétition A',
-    game: {name: 'valorant', logoUrl: 'http://localhost:5000/images/valorant.png'},
-    date: '09 Janvier',
-    time: '20:00',
-    teamA: { name: 'MDR', logoUrl: 'http://localhost:5000/images/mandatory.svg' },
-    teamB: { name: 'KC', logoUrl: 'http://localhost:5000/images/kc.png' }, // Logo manquant
-  },
-  // Ajoutez d'autres compétitions ici
-];
+// Connexion à MongoDB
+connectDB();
 
-app.get('/api/competitions', (req, res) => {
-  try {
-    console.log(req.query.games)
-    const games = req.query.games ? req.query.games.split(',') : [];
-    let query = 'SELECT * FROM competitions';
-    const params = [];
+// Middleware
+app.use(express.json());
 
-    if (games.length > 0) {
-      const placeholders = games.map(() => '?').join(',');
-      query += ` WHERE game IN (${placeholders})`;
-      params.push(...games);
-    }
+// Utilisation des routes
+app.use('/api/matches', matchesRoutes);
 
-    //const [rows] = await db.execute(query, params);
-    console.log(competitions)
-    res.json(competitions);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// Démarrage du serveur
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-app.use('/images', express.static(path.join(__dirname, 'public/images')));
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
 

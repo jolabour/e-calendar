@@ -1,52 +1,66 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
-import CompetitionList from './components/CompetitionList';
+import MatchesList from './components/MatchesList';
 import Filter from './components/GameFilter';
-import './App.css';
 import Header from './components/Header';
 import Loader from './components/Loader';
+import CreateMatch from './components/CreateMatch';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import './App.css';
 
 const App = () => {
-  const [competitions, setCompetitions] = useState([]);
-  const [selectedGames, setSelectedGames] = useState([]);
+  const games = ['trackmania', 'League of Legends', 'Valorant', 'Overwatch'];
+  const [matches, setMatches] = useState([]);
+  const [selectedGames, setSelectedGames] = useState(games);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
-  const games = ['trackmania', 'League of Legends',  'Valorant', 'Overwatch'];
   useEffect(() => {
-    fetchCompetitions();
+    fetchMatches();
   }, [selectedGames]);
 
-  const fetchCompetitions = async () => {
+  const fetchMatches = async () => {
     try {
       const gameQuery = selectedGames.length > 0 ? `?games=${selectedGames.join(',')}` : '';
-      const response = await fetch(`http://localhost:5000/api/competitions${gameQuery}`);
+      const response = await fetch(`http://localhost:5000/api/matches${gameQuery}`);
       const data = await response.json();
-      setCompetitions(data);
+      setMatches(data);
     } catch (error) {
-      console.error('Error fetching competitions:', error);
+      console.error('Error fetching matches:', error);
     } finally {
       setLoading(false);
     }
   };
 
+  const shouldShowSidebar = !['/create-match'].includes(location.pathname);
+
   return (
     <div className="app">
-      <header>
-        <Header />
-      </header>
+      <Header />
       <div className="main-container">
-        <aside className="sidebar">
-          <Filter games={games} selectedGames={selectedGames} onSelectGame={setSelectedGames} />
-        </aside>
-        <main className="competitions">
-          {loading ? (
-            <Loader />
-          ) : (
-            <CompetitionList competitions={competitions} />
-          )}
+        {shouldShowSidebar && (
+          <aside className="sidebar">
+            <Filter games={games} selectedGames={selectedGames} onSelectGame={setSelectedGames} />
+          </aside>
+        )}
+        <main className="content">
+          <Routes>
+            <Route path="/" element={loading ? <Loader /> : <MatchesList matches={matches} />} />
+            <Route path="/calendrier" element={<MatchesList matches={matches} />} />
+            <Route path="/create-match" element={<CreateMatch />} />
+          </Routes>
         </main>
       </div>
     </div>
   );
 };
 
-export default App;
+const AppWithRouter = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWithRouter;
+
+

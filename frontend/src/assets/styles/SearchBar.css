@@ -1,0 +1,24 @@
+.search-bar {
+    width: 80%; /* Prend toute la largeur de son conteneur parent */
+    padding: 10px; /* Ajoute un peu de padding à l'intérieur */
+    margin-bottom: 15px; /* Espace en bas pour séparer la barre de recherche des filtres */
+    border-radius: 8px; /* Arrondit les coins */
+    border: 1px solid #0d6474; /* Bordure fine et grise */
+    font-size: 16px; /* Taille de police */
+    outline: none; /* Supprime le contour par défaut au focus */
+    transition: box-shadow 0.3s ease; /* Transition pour l'effet d'ombre au focus */
+    background-color: black;
+    opacity: 0.;
+    color: white;
+  }
+  
+  .search-bar:focus {
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.5); /* Ajoute une ombre bleue autour de la barre lors du focus */
+    border-color: #0096ff; /* Change la couleur de la bordure au focus */
+    background-color: #1d1a1a;
+  }
+
+  .search-bar::placeholder {
+    color: #888888; /* Couleur du texte du placeholder */
+  }
+  

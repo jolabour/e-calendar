@@ -1,6 +1,6 @@
 .header {
   background: #000000;
-  padding: 35px;
+  padding: 10px 30px; /* Ajustez le padding pour un espacement vertical approprié */
   position: fixed;
   width: 100%;
   top: 0;
@@ -8,65 +8,52 @@
   z-index: 1000;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Espace entre le logo, la navigation, et le bouton de connexion */
   border-bottom: 1px solid #0d6474;
 }
 
 .logo-container {
-  margin-right: 50px; /* Place le logo à gauche */
+  flex: 0 1 auto; /* La largeur du logo sera ajustée en fonction de son contenu */
 }
 
 .logo {
-  height: 50px; /* Ajustez la taille de votre logo */
+  height: 50px; /* Ajustez la taille du logo */
 }
 
-.header-content {
+.nav-links {
   display: flex;
-  justify-content: flex-start;
-  flex: 1;
+  margin-left: 50px;
+  gap: 40px; /* Espace entre les onglets de navigation */
+  flex: 1; /* Permet à la navigation de prendre l'espace disponible */
+  justify-content: flex-start; /* Centre les onglets de navigation */
 }
 
-.header-content nav {
-  display: flex;
-}
-
-.header-content nav a {
-  margin: 10px 20px; /* Ajoutez la marge ici */
+.nav-links a {
   color: #ffffff;
   font-weight: bold;
   font-size: 1rem;
-  transition: color 0.3s ease;
   text-decoration: none; /* Enlève les soulignements par défaut */
+  transition: color 0.3s ease;
 }
 
-.header-content nav a:hover {
+.nav-links a:hover {
   color: #0d6474;
 }
 
 .login-button {
-  margin-left: auto; /* Espace entre la navigation et le bouton */
-  padding: 10px 20px;
+  padding: 10px 25px; /* Ajustez le padding pour une taille appropriée du bouton */
   background-color: #0d6474;
   color: #ffffff;
   border: 2px solid #ffffff;
-  border-radius: 25px;
+  border-radius: 25px; /* Ajustez le border-radius pour une forme arrondie */
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+  flex: 0;
 }
 
 .login-button:hover {
   background-color: #ffffff;
   color: #0d6474;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

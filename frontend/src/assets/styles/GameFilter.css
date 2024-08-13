@@ -1,7 +1,14 @@
 .filter-container {
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
   }
+  /* Centrage de la barre de recherche */
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Espacement en dessous de la barre de recherche */
+}
   
   .filter-item {
     padding: 20px;
