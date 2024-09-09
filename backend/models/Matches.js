@@ -6,13 +6,18 @@ const teamSchema = new mongoose.Schema({
   logo: { type: String}
 });
 
+const competitionSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  logo: { type: String}
+});
+
 // Définir le schéma principal pour les matchs
 const matchSchema = new mongoose.Schema({
   id: { type: mongoose.Schema.Types.ObjectId, auto: true },
   game: { type: String, required: true },
   time: { type: String, required: true }, // Format: HH:MM
   date: { type: Date, required: true },
-  competition: { type: String, required: true },
+  competition: { type: competitionSchema, required: true },
   broadcastUrl: { type: String} ,
   teamA: { type: teamSchema, required: true },
   teamB: { type: teamSchema, required: true }

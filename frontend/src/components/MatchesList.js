@@ -12,7 +12,7 @@ const MatchList = ({selectedGames}) => {
     // Logique pour charger les matchs depuis une API ou autre source
     const fetchMatches = async () => {
       try {
-        console.log('Fetching matches for selected games:', selectedGames);
+        console.log('Fetching matches for selected games:', matches[0]);
         const query = selectedGames && selectedGames.length > 0
         ? selectedGames.map(game => `${encodeURIComponent(game)}`).join(',')
         : '';
@@ -43,6 +43,19 @@ const MatchList = ({selectedGames}) => {
     setHoveredId(null);
   };
 
+  const gameLogo = (game) => {
+    switch (game) {
+      case 'trackmania':
+        return require('../assets/images/trackmania.png');
+      case 'valorant':
+        return require('../assets/images/valorant.png'); // Ensure you have these images in your assets folder
+      case 'league-of-legends':
+        return require('../assets/images/leagueoflegends.png'); // Ensure you have these images in your assets folder
+      default:
+        return defaultLogo;
+    }
+  };
+
   if (loading) {
     return <div><Loader />..</div>; // You can replace this with a loader component
   }
@@ -60,8 +73,8 @@ const MatchList = ({selectedGames}) => {
             >
               <div className="game-logo">
                 <img 
-                  src={match.game.logoUrl}
-                  alt={match.game.name}
+                  src={gameLogo(match.game)}
+                  alt={match.game}
                   loading="lazy"
                   className="game-logo" 
                 />
