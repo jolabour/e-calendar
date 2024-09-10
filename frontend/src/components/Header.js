@@ -12,6 +12,8 @@ const Header = () => (
         <Link to="/">Accueil</Link>
         <Link to="/calendrier">Calendrier</Link>
         <Link to="/create-match">Déclarer un match</Link>
+        <Link to="/create-competition">Creer une competion</Link>
+
     </nav>
     <button className="login-button">Connexion</button>
   </header>

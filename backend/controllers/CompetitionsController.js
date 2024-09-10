@@ -3,8 +3,17 @@ const Competition = require('../models/Competitions'); // Assurez-vous que le ch
 // Fonction pour ajouter un nouveau match
 const addCompetition = async (req, res) => {
   try {
-    console.log(req.body)
-    const competition = new Competition(req.body);
+    console.log(req.body);
+    const { game, competitionName, startDate, endDate } = req.body;
+    const competitionLogo = req.file ? req.file.location : null; // URL de l'image uploadée sur S3
+
+    const competition = new Competition({
+      game,
+      competitionName,
+      competitionLogo,
+      startDate,
+      endDate,
+    });
     await competition.save();
     res.status(201).json(Competition);
   } catch (error) {

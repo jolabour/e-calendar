@@ -5,7 +5,8 @@ const competitionSchema = new mongoose.Schema({
   id: { type: mongoose.Schema.Types.ObjectId, auto: true },
   game: { type: String, required: true },
   competitionName: { type: String, required: true },
-  startingDate: { type: String, required: true },
+  competitionLogo: { type: String, required: true },
+  startDate: { type: String, required: true },
   endDate: { type: String, required: true }
 });
 

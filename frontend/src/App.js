@@ -7,6 +7,7 @@ import Loader from './components/Loader';
 import CreateMatch from './components/CreateMatch';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
+import CreateCompetition from './components/CreateCompetition';
 
 const App = () => {
   const games = ['trackmania', 'league-of-legends', 'valorant', 'overwatch'];
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/" element={<MatchesList selectedGames={selectedGames} />} />
             <Route path="/calendrier" element={<MatchesList selectedGames={selectedGames} />} />
             <Route path="/create-match" element={<CreateMatch />} />
+            <Route path="/create-competition" element={<CreateCompetition />} />
           </Routes>
         </main>
       </div>

@@ -67,7 +67,7 @@ const CreateMatch = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="competionName">Competion Name:</label>
+          <label htmlFor="competionName">Competition Name:</label>
           <input
             type="text"
             id="competitionName"

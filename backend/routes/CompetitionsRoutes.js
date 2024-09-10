@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const CompetitionsController = require('../controllers/CompetitionsController');
+const upload = require('../middlewares/upload');
 
 // Route pour obtenir toutes les compétitions
 router.get('/', CompetitionsController.getAllCompetitions);
@@ -9,7 +10,7 @@ router.get('/', CompetitionsController.getAllCompetitions);
 router.get('/:id', CompetitionsController.getCompetitionById);
 
 // Route pour créer une nouvelle compétition
-router.post('/', CompetitionsController.addCompetition);
+router.post('/create', upload.single('image'), CompetitionsController.addCompetition);
 
 // Route pour mettre à jour une compétition
 router.put('/:id', CompetitionsController.updateCompetition);
