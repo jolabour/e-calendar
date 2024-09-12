@@ -8,6 +8,7 @@
     "devDependencies": {
         "concurrently": "^6.2.1",
         "css-loader": "^6.5.1",
+        "nodemon": "^3.1.4",
         "postcss-loader": "^6.2.0",
         "style-loader": "^3.3.1"
     },

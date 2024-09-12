@@ -11,6 +11,6 @@ const competitionSchema = new mongoose.Schema({
 });
 
 // Créer le modèle à partir du schéma
-const Match = mongoose.model('Competitions', competitionSchema);
+const Competition = mongoose.model('Competition', competitionSchema);
 
-module.exports = Match;
+module.exports = Competition;

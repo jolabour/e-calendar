@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../assets/styles/CreateMatch.css'; // Assurez-vous que le fichier CSS est correctement référencé
 
@@ -12,14 +12,31 @@ const CreateMatch = () => {
   const [teamBName, setTeamBName] = useState('');
   const [teamBLogo, setTeamBLogo] = useState('');
   const [broadcastUrl, setBroadcastUrl] = useState('');
+  const [competitions, setCompetitions] = useState([]);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Charger la liste des compétitions
+    const fetchCompetitions = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/competitions');
+        console.log(response.data) // Changez l'URL si nécessaire
+        setCompetitions(response.data);
+      } catch (error) {
+        setError('Failed to load competitions.');
+        console.error('Error loading competitions:', error);
+      }
+    };
+
+    fetchCompetitions();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/matches', {
         game: gameName,
-        competition: competitionName,
+        competition: competitionName, // Utilise l'ID de la compétition sélectionnée
         date: matchDate,
         time: matchTime,
         teamA: {
@@ -67,14 +84,20 @@ const CreateMatch = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="competionName">Competition Name:</label>
-          <input
-            type="text"
+          <label htmlFor="competitionName">Competition:</label>
+          <select
             id="competitionName"
             value={competitionName}
             onChange={(e) => setCompetitionName(e.target.value)}
             required
-          />
+          >
+            <option value="">Select a competition</option>
+            {competitions.map((competition) => (
+              <option key={competition._id} value={competition._id}>
+                {competition.competitionName}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="matchDate">Match Date:</label>
@@ -150,3 +173,4 @@ const CreateMatch = () => {
 };
 
 export default CreateMatch;
+

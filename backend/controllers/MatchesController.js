@@ -22,6 +22,7 @@ const getMatches = async (req, res) => {
     let query = {};
     console.log('game', game);
     console.log('competition', competition);
+    console.log("mdr")
 
     // Si le paramètre 'game' est présent, ajoutez-le à la requête
     if (game) {
@@ -35,8 +36,8 @@ const getMatches = async (req, res) => {
     }
     console.log('query', query);
     // Recherchez les matchs avec la requête construite
-    const matches = await Match.find(query);
-
+    const matches = await Match.find(query).populate('competition').exec();;
+    console.log(matches)
     res.status(200).json(matches);
   } catch (error) {
     console.error('Error fetching matches:', error);

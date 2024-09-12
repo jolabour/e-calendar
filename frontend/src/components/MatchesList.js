@@ -3,7 +3,7 @@ import '../assets/styles/MatchesList.css'; // Assurez-vous que le fichier CSS es
 import defaultLogo from '../assets/images/default-logo.png'; // Logo par défaut
 import Loader from './Loader';
 
-const MatchList = ({selectedGames}) => {
+const MatchList = ({ selectedGames }) => {
   const [hoveredId, setHoveredId] = useState(null);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,10 +12,10 @@ const MatchList = ({selectedGames}) => {
     // Logique pour charger les matchs depuis une API ou autre source
     const fetchMatches = async () => {
       try {
-        console.log('Fetching matches for selected games:', matches[0]);
+        console.log('Fetching matches for selected games:', selectedGames);
         const query = selectedGames && selectedGames.length > 0
-        ? selectedGames.map(game => `${encodeURIComponent(game)}`).join(',')
-        : '';
+          ? selectedGames.map(game => `${encodeURIComponent(game)}`).join(',')
+          : '';
         console.log('query', `http://localhost:5000/api/matches?game=${query}`);
         const response = await fetch(`http://localhost:5000/api/matches?game=${query}`);
         if (!response.ok) {
@@ -56,6 +56,13 @@ const MatchList = ({selectedGames}) => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `${day}/${month}`;
+  };
+
   if (loading) {
     return <div><Loader />..</div>; // You can replace this with a loader component
   }
@@ -80,8 +87,14 @@ const MatchList = ({selectedGames}) => {
                 />
               </div>
               <div className="match-time">
-                <p className="match-date">{match.date}</p>
+                <p className="match-date">{formatDate(match.date)}</p>
                 <p className="match-time">{match.time}</p>
+              </div>
+              <div className='competition-details'>
+                  {match.competition.competitionLogo && (
+                  <img src={match.competition.competitionLogo} alt={match.competition.competitionName} className='competition-logo' />
+                  )}
+                  <div className="competition-name">{match.competition.competitionName}</div>
               </div>
               <div className="match-details">
                 <div className="team-name">{match.teamA.name}</div>
